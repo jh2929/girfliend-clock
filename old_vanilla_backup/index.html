@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Mi Niña // 24 de Diciembre 💕</title>
+  <meta name="description" content="Cuenta regresiva romántica en tiempo real para el día más importante">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Outfit:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Fondo animado interactivo: Corazones flotantes, polvo de estrellas y bokeh rosa -->
+  <canvas id="love-canvas"></canvas>
+
+  <!-- Efectos de luz ambiental suave y viñeta romántica -->
+  <div class="ambient-glow"></div>
+  <div class="sparkle-overlay"></div>
+
+  <!-- Botón de música / audio ambiental romántico (Opcional) -->
+  <button id="music-btn" class="pink-audio-btn" aria-label="Melodía romántica" title="Sonido ambiental">
+    <span class="btn-icon">🎵</span>
+    <span class="btn-text">Melodía Dulce</span>
+  </button>
+
+  <!-- Contenedor Principal Romántico -->
+  <main class="hero-container">
+    <div class="love-card">
+
+      <!-- Badge Superior Cute -->
+      <div class="love-badge">
+        <span class="badge-heart">💖</span>
+        <span class="badge-text">24 DE DICIEMBRE</span>
+        <span class="badge-heart">💖</span>
+      </div>
+
+      <!-- Título solicitado por el usuario -->
+      <h1 class="love-title">
+        <span class="title-main">esperando el dia mas importante para mi</span>
+        <span class="title-girlfriend">mi niña <span class="heart-pulse">💕</span></span>
+      </h1>
+
+      <p class="love-caption">Cada segundo que pasa es un latido más cerca de nuestro día especial ✨</p>
+
+      <!-- Tablero del Contador en Tiempo Real (100% JavaScript en el navegador) -->
+      <div class="countdown-wrapper">
+        <div class="countdown-grid" aria-label="Contador de amor">
+
+          <!-- MESES -->
+          <div class="time-card">
+            <div class="time-card-inner">
+              <span class="time-num" id="months">00</span>
+              <span class="time-tag">MESES</span>
+            </div>
+            <div class="card-glow"></div>
+          </div>
+
+          <div class="time-sep">♥</div>
+
+          <!-- DÍAS -->
+          <div class="time-card">
+            <div class="time-card-inner">
+              <span class="time-num" id="days">00</span>
+              <span class="time-tag">DÍAS</span>
+            </div>
+            <div class="card-glow"></div>
+          </div>
+
+          <div class="time-sep">♥</div>
+
+          <!-- HORAS -->
+          <div class="time-card">
+            <div class="time-card-inner">
+              <span class="time-num" id="hours">00</span>
+              <span class="time-tag">HORAS</span>
+            </div>
+            <div class="card-glow"></div>
+          </div>
+
+          <div class="time-sep">♥</div>
+
+          <!-- MINUTOS -->
+          <div class="time-card">
+            <div class="time-card-inner">
+              <span class="time-num" id="minutes">00</span>
+              <span class="time-tag">MINUTOS</span>
+            </div>
+            <div class="card-glow"></div>
+          </div>
+
+          <div class="time-sep">♥</div>
+
+          <!-- SEGUNDOS (Animado en vivo) -->
+          <div class="time-card seconds-card">
+            <div class="time-card-inner">
+              <span class="time-num" id="seconds">00</span>
+              <span class="time-tag">SEGUNDOS</span>
+            </div>
+            <div class="card-glow"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Indicador en vivo -->
+      <div class="live-status">
+        <span class="live-dot"></span>
+        <span class="live-text" id="live-target-text">Calculando en tiempo real con amor...</span>
+      </div>
+
+      <div class="decorative-ribbon">
+        <span>✨ Te amo con todo mi corazón ✨</span>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

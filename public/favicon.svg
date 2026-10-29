@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="pureHeartGrad" x1="20%" y1="10%" x2="80%" y2="90%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="25%" stop-color="#fda4af" />
+      <stop offset="65%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#be123c" />
+    </linearGradient>
+    <filter id="heartGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Solo el corazón puro, sin círculos, sin bordes ni contornos -->
+  <g filter="url(#heartGlow)">
+    <path d="M50 24 C50 6, 18 2, 18 28 C18 52, 50 74, 50 88 C50 74, 82 52, 82 28 C82 2, 50 6, 50 24 Z" 
+          fill="url(#pureHeartGrad)" />
+  </g>
+</svg>

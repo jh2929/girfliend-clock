@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-text: 'Dancing Script', cursive;
+    --font-num: 'Redaction 10', serif;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden !important;
+    background-color: #020307;
+    color: #f8fafc;
+    font-family: var(--font-text);
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Tipografías solicitadas por el usuario */
+.font-text {
+  font-family: var(--font-text);
+}
+
+.font-num {
+  font-family: var(--font-num);
+}
+
+/* Efectos de resplandor cósmico */
+.text-glow-celestial {
+  text-shadow: 0 0 25px rgba(253, 164, 175, 0.4), 0 0 50px rgba(244, 114, 182, 0.2);
+}
+
+.text-glow-heart {
+  filter: drop-shadow(0 0 16px rgba(244, 63, 94, 0.85)) drop-shadow(0 0 32px rgba(244, 114, 182, 0.5));
+}
+
+.box-glow-cosmic {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 40px rgba(244, 114, 182, 0.08);
+}
+
+/* Animaciones sutiles */
+@keyframes heartPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 12px rgba(244, 63, 94, 0.8));
+  }
+  15% {
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 22px rgba(244, 63, 94, 1));
+  }
+  30% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 14px rgba(244, 63, 94, 0.85));
+  }
+  45% {
+    transform: scale(1.14);
+    filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.95));
+  }
+}
+
+.animate-heart-pulse {
+  animation: heartPulse 1.8s infinite ease-in-out;
+  transform-origin: center;
+}

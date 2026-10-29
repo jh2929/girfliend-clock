@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "esperando el dia mas importante para mi • te amo ✨",
+  description = "Cuenta regresiva astronómica en tiempo real para el 24 de diciembre"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="dark h-screen w-screen overflow-hidden">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link id="dynamic-favicon" rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Redaction+10:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Script de Animación JavaScript para el Favicon Pulsante en Tiempo Real -->
+    <script is:inline>
+      (function() {
+        const favicon = document.getElementById('dynamic-favicon');
+        if (!favicon) return;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = 64;
+        canvas.height = 64;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        let t = 0;
+        function updateFaviconBeat() {
+          t += 0.055;
+          // Doble latido cardíaco orgánico (pulso sístole/diástole)
+          const p1 = Math.pow(Math.max(0, Math.sin(t)), 8) * 0.22;
+          const p2 = Math.pow(Math.max(0, Math.sin(t - 0.28)), 8) * 0.12;
+          const scale = 1 + (p1 + p2);
+
+          ctx.clearRect(0, 0, 64, 64);
+          ctx.save();
+
+          // Transformación centrada para palpitar
+          ctx.translate(32, 32);
+          ctx.scale(scale, scale);
+          ctx.translate(-32, -32);
+
+          // Brillo suave del corazón (solo el corazón, sin bordes ni contornos)
+          ctx.shadowColor = '#f43f5e';
+          ctx.shadowBlur = 8 + (p1 + p2) * 20;
+
+          // Dibujar únicamente la silueta pura del corazón
+          ctx.beginPath();
+          const topCurve = 28 * 0.3;
+          ctx.moveTo(32, 19);
+          ctx.bezierCurveTo(32 - 15, 19 - topCurve, 32 - 26, 19 + 11, 32, 19 + 27);
+          ctx.bezierCurveTo(32 + 26, 19 + 11, 32 + 15, 19 - topCurve, 32, 19);
+
+          const grad = ctx.createLinearGradient(16, 16, 48, 48);
+          grad.addColorStop(0, '#ffffff');
+          grad.addColorStop(0.25, '#fda4af');
+          grad.addColorStop(0.65, '#f43f5e');
+          grad.addColorStop(1, '#be123c');
+          ctx.fillStyle = grad;
+          ctx.fill();
+
+          ctx.restore();
+
+          favicon.href = canvas.toDataURL('image/png');
+        }
+
+        setInterval(updateFaviconBeat, 50);
+      })();
+    </script>
+  </head>
+  <body class="bg-[#010206] text-slate-100 h-screen w-screen overflow-hidden relative selection:bg-rose-500/20 selection:text-rose-200">
+    <slot />
+  </body>
+</html>

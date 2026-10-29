@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { StarfieldCanvas } from '../components/StarfieldCanvas';
+import { HorizontalCountdown } from '../components/HorizontalCountdown';
+---
+
+<Layout title="esperando el dia mas importante para mi • te amo ✨">
+  <!-- Fondo con simulación hiperrealista del espacio exterior -->
+  <StarfieldCanvas client:load />
+
+  <!-- Capa sutil de profundidad astronómica -->
+  <div 
+    class="fixed inset-0 pointer-events-none z-[1] bg-[radial-gradient(circle_at_center,transparent_55%,rgba(1,2,6,0.85)_100%)]" 
+    aria-hidden="true"
+  />
+
+  <!-- Hero Section Centrado en Pantalla Completa sin Scroll -->
+  <main class="relative z-10 h-screen w-screen max-h-screen overflow-hidden flex items-center justify-center p-3 sm:p-6">
+    <HorizontalCountdown client:load />
+  </main>
+
+  <!-- Esquina inferior izquierda -->
+  <div class="fixed bottom-4 sm:bottom-6 left-5 sm:left-8 z-20 pointer-events-none select-none">
+    <p class="font-text text-lg sm:text-2xl text-slate-300/85 tracking-wide drop-shadow-[0_0_15px_rgba(244,114,182,0.35)]">
+      recuerda siempre que te amo
+    </p>
+  </div>
+
+  <!-- Esquina inferior derecha -->
+  <div class="fixed bottom-4 sm:bottom-6 right-5 sm:right-8 z-20 pointer-events-none select-none">
+    <p class="font-text text-base sm:text-xl text-slate-400/75 tracking-wider drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+      by jesus emilio
+    </p>
+  </div>
+</Layout>

@@ -1,0 +1,446 @@
+:root {
+  --bg-dark: #190814;
+  --bg-gradient: radial-gradient(circle at 50% 25%, #3d122f 0%, #20081a 60%, #11030d 100%);
+  --pink-light: #fff0f5;
+  --pink-soft: #ffccd5;
+  --pink-blush: #ffb3c1;
+  --pink-rose: #ff758f;
+  --pink-accent: #ff4d6d;
+  --pink-deep: #c9184a;
+  --gold-warm: #ffe5a3;
+  --glass-bg: rgba(255, 220, 235, 0.09);
+  --glass-border: rgba(255, 182, 193, 0.35);
+  --glass-shadow: 0 25px 60px rgba(255, 77, 109, 0.22);
+  --font-script: 'Dancing Script', cursive;
+  --font-serif: 'Playfair Display', serif;
+  --font-num: 'Outfit', sans-serif;
+  --font-text: 'Poppins', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: var(--bg-dark);
+  color: var(--pink-light);
+  font-family: var(--font-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Lienzo de corazones y estrellas flotantes */
+#love-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Resplandor ambiental de fantasía rosa */
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 117, 143, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(255, 77, 109, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 204, 213, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sparkle-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 40%, rgba(17, 3, 13, 0.8) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Botón de melodía dulce */
+.pink-audio-btn {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.1rem;
+  background: rgba(255, 105, 180, 0.15);
+  border: 1px solid rgba(255, 182, 193, 0.45);
+  border-radius: 50px;
+  color: var(--pink-soft);
+  cursor: pointer;
+  z-index: 20;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-family: var(--font-text);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 20px rgba(255, 77, 109, 0.2);
+}
+
+.pink-audio-btn:hover {
+  background: rgba(255, 77, 109, 0.3);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);
+  color: #fff;
+  border-color: var(--pink-rose);
+}
+
+.pink-audio-btn.playing {
+  background: linear-gradient(135deg, rgba(255, 77, 109, 0.5), rgba(255, 117, 143, 0.6));
+  color: #ffffff;
+  border-color: #fff;
+  animation: pulseButton 2s infinite ease-in-out;
+}
+
+/* Contenedor Principal */
+.hero-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.2rem;
+  z-index: 5;
+}
+
+/* Tarjeta Romántica de Cristal (Glassmorphism) */
+.love-card {
+  width: 100%;
+  max-width: 960px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 36px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 3.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--glass-shadow), inset 0 0 40px rgba(255, 182, 193, 0.08);
+  animation: cardFloatIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Badge Cute */
+.love-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 1.4rem;
+  background: rgba(255, 77, 109, 0.16);
+  border: 1px solid rgba(255, 143, 163, 0.4);
+  border-radius: 50px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(255, 77, 109, 0.18);
+}
+
+.love-badge .badge-text {
+  font-family: var(--font-num);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--pink-light);
+  text-transform: uppercase;
+}
+
+.love-badge .badge-heart {
+  font-size: 0.95rem;
+  animation: gentleBounce 2s infinite ease-in-out;
+}
+
+/* Título */
+.love-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.title-main {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3.4vw, 2.4rem);
+  color: #fff0f5;
+  letter-spacing: 0.02em;
+  text-shadow: 0 4px 25px rgba(255, 117, 143, 0.4);
+}
+
+.title-girlfriend {
+  font-family: var(--font-script);
+  font-size: clamp(2.6rem, 7vw, 4.8rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 10%, #ffccd5 40%, #ff4d6d 80%, #ff758f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 6px 30px rgba(255, 77, 109, 0.6));
+  line-height: 1.15;
+}
+
+.heart-pulse {
+  display: inline-block;
+  -webkit-text-fill-color: initial;
+  animation: heartBeat 1.4s infinite ease-in-out;
+}
+
+.love-caption {
+  font-family: var(--font-text);
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+  color: var(--pink-soft);
+  max-width: 580px;
+  margin-bottom: 2.8rem;
+  opacity: 0.92;
+  font-weight: 300;
+}
+
+/* Tablero del Contador */
+.countdown-wrapper {
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.countdown-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+/* Separador de corazón entre tarjetas */
+.time-sep {
+  font-size: 1.2rem;
+  color: var(--pink-rose);
+  opacity: 0.75;
+  animation: sepPulse 1.8s infinite ease-in-out;
+  padding-bottom: 1.4rem;
+}
+
+/* Tarjeta individual de tiempo */
+.time-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(255, 230, 240, 0.14), rgba(255, 150, 180, 0.06));
+  border: 1px solid rgba(255, 192, 203, 0.35);
+  border-radius: 24px;
+  min-width: clamp(100px, 14.5vw, 145px);
+  padding: 1.4rem 1.1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 12px 35px rgba(255, 77, 109, 0.15);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.time-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  border-color: rgba(255, 143, 163, 0.75);
+  box-shadow: 0 20px 45px rgba(255, 77, 109, 0.35);
+}
+
+.time-card.seconds-card {
+  border-color: rgba(255, 77, 109, 0.6);
+  background: linear-gradient(145deg, rgba(255, 77, 109, 0.22), rgba(255, 117, 143, 0.1));
+}
+
+.time-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Número grande y legible */
+.time-num {
+  font-family: var(--font-num);
+  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(255, 117, 143, 0.6);
+  letter-spacing: -0.02em;
+}
+
+/* Pulso vivo cuando cambian los segundos */
+.time-num.pulse {
+  animation: numberPop 0.35s ease-out;
+}
+
+/* Etiqueta (MESES, DÍAS, ETC.) */
+.time-tag {
+  font-family: var(--font-text);
+  font-size: clamp(0.68rem, 1.1vw, 0.8rem);
+  font-weight: 600;
+  color: var(--pink-soft);
+  letter-spacing: 0.18em;
+  margin-top: 0.75rem;
+  text-transform: uppercase;
+}
+
+/* Indicador en Vivo (Garantiza visualmente que está activo) */
+.live-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 1.4rem;
+  background: rgba(255, 240, 245, 0.08);
+  border: 1px solid rgba(255, 182, 193, 0.25);
+  border-radius: 50px;
+  margin-bottom: 1.8rem;
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--pink-accent);
+  box-shadow: 0 0 12px var(--pink-accent);
+  animation: liveBeacon 1.2s infinite ease-in-out;
+}
+
+.live-text {
+  font-family: var(--font-num);
+  font-size: 0.8rem;
+  color: var(--pink-soft);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.decorative-ribbon {
+  font-family: var(--font-script);
+  font-size: 1.45rem;
+  color: var(--gold-warm);
+  text-shadow: 0 2px 12px rgba(255, 229, 163, 0.5);
+}
+
+/* Animaciones */
+@keyframes cardFloatIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.22);
+  }
+  40% {
+    transform: scale(1.05);
+  }
+  60% {
+    transform: scale(1.18);
+  }
+}
+
+@keyframes gentleBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes sepPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 8px var(--pink-accent));
+  }
+}
+
+@keyframes liveBeacon {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+    box-shadow: 0 0 18px var(--pink-accent);
+  }
+}
+
+@keyframes numberPop {
+  0% {
+    transform: scale(1.12);
+    color: #ffffff;
+    text-shadow: 0 0 25px rgba(255, 77, 109, 1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseButton {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(255, 77, 109, 0.3);
+  }
+  50% {
+    box-shadow: 0 6px 30px rgba(255, 77, 109, 0.7);
+  }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+  .love-card {
+    padding: 2.2rem 1.2rem;
+    border-radius: 28px;
+  }
+
+  .countdown-grid {
+    gap: 0.6rem;
+  }
+
+  .time-sep {
+    display: none;
+  }
+
+  .time-card {
+    min-width: 44%;
+    padding: 1.1rem 0.6rem;
+  }
+
+  .time-card.seconds-card {
+    min-width: 92%;
+    margin-top: 0.3rem;
+  }
+
+  .pink-audio-btn {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .time-card {
+    min-width: 46%;
+  }
+}
